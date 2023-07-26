@@ -17,13 +17,23 @@
                 <div class="invalid-feedback">{{ $errors->first('nama_menu') }}</div>
             </div>
 
-            <!-- Harga Field -->
+            <!-- Harga Jual Field -->
             <div class="mb-3 form-group">
-                <label for="harga" class="form-label">Harga Menu</label>
+                <label for="harga_jual" class="form-label">Harga Modal Menu</label>
                 <div class="input-group has-validation">
                     <span class="input-group-text">Rp</span>
-                    <input type="number" class="form-control {{ $errors->has('harga_menu') ? 'is-invalid' : '' }}" id="harga" name="harga_menu" placeholder="000.00" value="{{ old('harga_menu') }}">
-                    <div class="invalid-feedback">{{ $errors->first('harga_menu') }}</div>
+                    <input type="number" class="form-control {{ $errors->has('harga_modal_menu') ? 'is-invalid' : '' }}" id="harga_jual" name="harga_modal_menu" placeholder="000.00" value="{{ old('harga_modal_menu') }}">
+                    <div class="invalid-feedback">{{ $errors->first('harga_modal_menu') }}</div>
+                </div>
+            </div>
+
+            <!-- Harga Modal Field -->
+            <div class="mb-3 form-group">
+                <label for="harga" class="form-label">Harga Jual Menu</label>
+                <div class="input-group has-validation">
+                    <span class="input-group-text">Rp</span>
+                    <input type="number" class="form-control {{ $errors->has('harga_jual_menu') ? 'is-invalid' : '' }}" id="harga" name="harga_jual_menu" placeholder="000.00" value="{{ old('harga_jual_menu') }}">
+                    <div class="invalid-feedback">{{ $errors->first('harga_jual_menu') }}</div>
                 </div>
             </div>
 

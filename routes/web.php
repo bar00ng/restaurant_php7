@@ -6,7 +6,9 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\KasirController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\OwnerController;
+use App\Http\Controllers\PesananController;
 
 /*
 |--------------------------------------------------------------------------
@@ -55,6 +57,14 @@ Route::group(['middleware' => ['auth', 'role:superadmin']], function() {
     Route::get('/edit-owner/{user_id}', [OwnerController::class, 'formEdit'])->name('owner.form.edit');
     Route::patch('/edit-owner/{user_id}', [OwnerController::class, 'patch'])->name('owner.patch');
     Route::delete('/hapus-owner/{user_id}', [OwnerController::class, 'delete'])->name('owner.delete');
+
+    // Routes untuk Pesanan
+    Route::get('/tambah-pesanan', [PesananController::class, 'index'])->name('pesanan');
+
+    // Routes untuk tambah barang ke cart
+    Route::post('/add-to-cart/{menu_id}', [CartController::class, 'store'])->name('cart.store');
+    Route::post('/destroy-cart', [CartController::class, 'destroy'])->name('cart.destroy');
+    Route::post('/remove-from-cart/{cart_item_id}', [CartController::class, 'remove'])->name('cart.remove');
 });
 
 Route::group(['middleware' => ['auth']], function() {

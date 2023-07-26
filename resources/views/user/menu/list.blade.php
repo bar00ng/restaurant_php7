@@ -4,7 +4,7 @@
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Daftar Kategori</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Daftar Menu</h6>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -13,7 +13,8 @@
                         <tr>
                             <th>No</th>
                             <th>Nama Menu</th>
-                            <th>Harga (Rp.)</th>
+                            <th>Harga Modal(Rp.)</th>
+                            <th>Harga Jual(Rp.)</th>
                             <th>Kategori</th>
                             <th>Status</th>
                             <th>Aksi</th>
@@ -23,7 +24,8 @@
                         <tr>
                             <th>No</th>
                             <th>Nama Menu</th>
-                            <th>Harga (Rp.)</th>
+                            <th>Harga Modal(Rp.)</th>
+                            <th>Harga Jual(Rp.)</th>
                             <th>Kategori</th>
                             <th>Status</th>
                             <th>Aksi</th>
@@ -42,7 +44,8 @@
                                 <tr>
                                     <td>{{ $no++ }}</td>
                                     <td>{{ $item['nama_menu'] }}</td>
-                                    <td>{{ number_format($item['harga_menu']) }}</td>
+                                    <td>{{ number_format($item['harga_modal_menu']) }}</td>
+                                    <td>{{ number_format($item['harga_jual_menu']) }}</td>
                                     <td>{{ $item->kategori['nama_kategori'] }}</td>
                                     <td>
                                         @if ($item['inStock'])
@@ -69,4 +72,24 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('scripts')
+    <script src="/assets/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="/assets/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="/assets/js/demo/datatables-demo.js"></script>
+
+    <script>
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+        })
+    </script>
+@endsection
+
+@section('styles')
+     <!-- Custom styles for this page -->
+     <link href="/assets/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 @endsection

@@ -55,3 +55,23 @@
         </div>
     </div>
 @endsection
+
+@section('scripts')
+    <script src="/assets/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="/assets/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="/assets/js/demo/datatables-demo.js"></script>
+
+    <script>
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+        })
+    </script>
+@endsection
+
+@section('styles')
+     <!-- Custom styles for this page -->
+     <link href="/assets/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+@endsection

@@ -26,7 +26,8 @@ class MenuController extends Controller
     public function store(Request $request) {
         $validated = $request->validate([
             'nama_menu' => 'required|string|max:255',
-            'harga_menu' => 'required|numeric|min:0',
+            'harga_modal_menu' => 'required|numeric|min:0',
+            'harga_jual_menu' => 'required|numeric|min:0',
             'kategori_id' => 'required|exists:kategori,id',
         ], [
             'required' => 'Kolom :attribute wajib diisi.',
@@ -54,7 +55,8 @@ class MenuController extends Controller
     public function patch(Request $request, $menu_id) {
         $validated = $request->validate([
             'nama_menu' => 'required|string|max:255',
-            'harga_menu' => 'required|numeric|min:0',
+            'harga_modal_menu' => 'required|numeric|min:0',
+            'harga_jual_menu' => 'required|numeric|min:0',
             'kategori_id' => 'required|exists:kategori,id', 
             'inStock' => 'required|boolean'
         ], [

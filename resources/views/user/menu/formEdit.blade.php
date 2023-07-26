@@ -3,7 +3,7 @@
 @section('content')
 <div class="card shadow mb-4">
     <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">Tambah Menu Baru</h6>
+        <h6 class="m-0 font-weight-bold text-primary">Edit Menu Baru</h6>
     </div>
     <div class="card-body">
         <form action="{{ route('menu.patch', ['menu_id' => $menu['id']]) }}" method="POST">
@@ -18,13 +18,23 @@
                 <div class="invalid-feedback">{{ $errors->first('nama_menu') }}</div>
             </div>
 
-            <!-- Harga Field -->
+            <!-- Harga Modal Field -->
             <div class="mb-3 form-group">
-                <label for="harga" class="form-label">Harga Menu</label>
+                <label for="harga" class="form-label">Harga Modal Menu</label>
                 <div class="input-group has-validation">
                     <span class="input-group-text">Rp</span>
-                    <input type="number" class="form-control {{ $errors->has('harga_menu') ? 'is-invalid' : '' }}" id="harga" name="harga_menu" placeholder="000.00" value="{{ $errors->has('harga_menu') ? old('harga_menu') : $menu['harga_menu'] }}">
-                    <div class="invalid-feedback">{{ $errors->first('harga_menu') }}</div>
+                    <input type="number" class="form-control {{ $errors->has('harga_modal_menu') ? 'is-invalid' : '' }}" id="harga" name="harga_modal_menu" placeholder="000.00" value="{{ $errors->has('harga_modal_menu') ? old('harga_modal_menu') : $menu['harga_modal_menu'] }}">
+                    <div class="invalid-feedback">{{ $errors->first('harga_modal_menu') }}</div>
+                </div>
+            </div>
+
+            <!-- Harga Jual Field -->
+            <div class="mb-3 form-group">
+                <label for="harga" class="form-label">Harga Jual Menu</label>
+                <div class="input-group has-validation">
+                    <span class="input-group-text">Rp</span>
+                    <input type="number" class="form-control {{ $errors->has('harga_jual_menu') ? 'is-invalid' : '' }}" id="harga" name="harga_jual_menu" placeholder="000.00" value="{{ $errors->has('harga_jual_menu') ? old('harga_jual_menu') : $menu['harga_jual_menu'] }}">
+                    <div class="invalid-feedback">{{ $errors->first('harga_jual_menu') }}</div>
                 </div>
             </div>
 

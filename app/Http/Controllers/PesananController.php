@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pesanan;
+use App\Models\Menu;
 use App\Http\Requests\StorePesananRequest;
 use App\Http\Requests\UpdatePesananRequest;
 
@@ -15,7 +16,11 @@ class PesananController extends Controller
      */
     public function index()
     {
-        //
+        $pageName = 'Tambah Pesanan';
+        $inStockMenus = Menu::where('inStock', true)
+                        ->get();
+
+        return view('user.pesanan.list', compact('pageName', 'inStockMenus'));
     }
 
     /**

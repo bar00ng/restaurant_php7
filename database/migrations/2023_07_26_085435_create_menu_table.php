@@ -16,7 +16,8 @@ class CreateMenuTable extends Migration
         Schema::create('menu', function (Blueprint $table) {
             $table->id();
             $table->string('nama_menu');
-            $table->double('harga_menu');
+            $table->double('harga_modal_menu');
+            $table->double('harga_jual_menu');
             $table->foreignId('kategori_id')->constrained('kategori')->onDelete('cascade');
             $table->boolean('inStock')->default(true);
             $table->timestamps();

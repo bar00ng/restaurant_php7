@@ -13,9 +13,10 @@ class Menu extends Model
 
     protected $fillable = [
         'nama_menu',
-        'harga_menu',
+        'harga_modal_menu',
+        'harga_jual_menu',
         'kategori_id',
-        'inStock'
+        'inStock',
     ];
 
     public function kategori(): HasOne {
