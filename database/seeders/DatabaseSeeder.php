@@ -16,10 +16,11 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call(LaratrustSeeder::class);
+        $this->call(KategoriMenuSeeder::class);
 
         User::create([
             'name' => 'SUPERADMIN',
-            'email' => 'admin@example.com',
+            'email' => 'superadmin@example.com',
             'password' => Hash::make('superadmin')
         ])->attachRole('superadmin');
 

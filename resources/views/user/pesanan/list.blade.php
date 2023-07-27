@@ -1,7 +1,7 @@
 @extends('user.template.master')
 
 @section('content')
-    <div class="row">
+    <div class="row overflow-auto" style="max-height: 60vh;">
         @foreach ($inStockMenus as $menu)
             <div class="col-md-3">
                 <div class="card mb-3">
@@ -21,11 +21,4 @@
             </div>
         @endforeach
     </div>
-@endsection
-
-@section('scripts')
-    <script>
-        const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
-        const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
-    </script>
 @endsection

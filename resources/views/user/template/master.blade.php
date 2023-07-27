@@ -88,9 +88,8 @@
                 <div id="collapsePesanan" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="{{ route('pesanan') }}">Tambah Pesanan</a>
-                        <a class="collapse-item" href="buttons.html">Daftar Pesanan</a>
-                        <a class="collapse-item" href="cards.html">Daftar Pesanan Selesai</a>
-                        <a class="collapse-item" href="cards.html">Daftar Pesanan Tertunda</a>
+                        <a class="collapse-item" href="{{ route('pesanan.tertunda') }}">Daftar Pesanan <b>Tertunda</b></a>
+                        <a class="collapse-item" href="{{ route('pesanan.selesai') }}">Daftar Pesanan <b>Selesai</b></a>
                     </div>
                 </div>
             </li>
@@ -217,23 +216,6 @@
                                         <div>Keranjang Masih Kosong</div>
                                     </div>
                                 @else
-                                    @php
-                                        $cartItems = Cart::content();
-
-                                        $totalWithoutTax = 0;
-                                        $totalTax = 0;
-
-                                        foreach ($cartItems as $item) {
-                                            // Total harga dari masing-masing item tanpa tax
-                                            $totalWithoutTax += $item->price * $item->qty;
-
-                                            // Total tax dari masing-masing item
-                                            $totalTax += $item->options->tax * $item->qty;
-                                        }
-
-                                        // Total harga dengan tax
-                                        $totalWithTax = $totalWithoutTax + $totalTax;
-                                    @endphp
                                     @foreach (Cart::content() as $row)
                                         <div class="dropdown-item d-flex align-items-center justify-content-between">
                                             <div>
@@ -248,7 +230,7 @@
                                             <div>
                                                 <form action="{{ route('cart.remove', ['cart_item_id' => $row->rowId]) }}" method="post">
                                                     @csrf
-                                                    <button type="submit" class="btn text-danger"><i class="fas fa-fw fa-trash"></i></button>
+                                                    <button type="submit" class="btn text-danger"  data-bs-toggle="tooltip" data-bs-placement="top" title="Remove from Cart"><i class="fas fa-fw fa-trash"></i></button>
                                                 </form>
                                             </div>
                                         </div>
@@ -257,10 +239,12 @@
                                         <div>
                                             <b>Total Belanja</b>
                                         </div>
-                                        <div>{{ 'Rp. ' . number_format($totalWithoutTax) }}</div>
+                                        <div>{{ 'Rp. ' . Cart::subtotal() }}</div>
+                                    </div>
+                                    <div class="dropdown-item d-flex align-items-center justify-content-center">
+                                        <a href="{{ route('pesanan.form.add') }}" role="button" class="btn btn-block btn-primary btn-sm">Checkout</a>
                                     </div>
                                 @endif
-                                
                             </div>
                         </li>
 
@@ -282,13 +266,11 @@
                                     Profile
                                 </a>
                                 <div class="dropdown-divider"></div>
-                                <form action="{{ route('logout') }}" method="post">
-                                    @csrf
-                                    <button type="submit" class="dropdown-item">
-                                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Logout
-                                    </button>    
-                                </form>
+                                </a>
+                                {{--  --}}
                             </div>
                         </li>
 
@@ -364,15 +346,18 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Sudah Siap Untuk Logout?</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-body">Pilih "Logout" di bawah ini jika Anda siap mengakhiri sesi saat ini.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
+                    <form action="{{ route('logout') }}" method="post">
+                        @csrf
+                        <button type="submit" class="btn btn-primary">Logout</button>    
+                    </form>
                 </div>
             </div>
         </div>
@@ -388,6 +373,12 @@
     <!-- Custom scripts for all pages-->
     <script src="/assets/js/sb-admin-2.min.js"></script>
 
+    <script>
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+        })
+    </script>
     @yield('scripts')
 </body>
 

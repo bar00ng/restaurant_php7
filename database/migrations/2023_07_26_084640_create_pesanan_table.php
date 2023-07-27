@@ -14,8 +14,8 @@ class CreatePesananTable extends Migration
     public function up()
     {
         Schema::create('pesanan', function (Blueprint $table) {
-            $table->id();
-            $table->json('data_pesanan');
+            $table->string('kd_pesanan')->primary();
+            $table->string('pemesan_pesanan');
             $table->double('total_pesanan');
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->date('tanggal_pesanan');
