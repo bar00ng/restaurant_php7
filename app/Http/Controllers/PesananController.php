@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use App\Models\Menu;
+use PDF;
+use App\Models\Payment;
 
 class PesananController extends Controller
 {
@@ -80,5 +82,17 @@ class PesananController extends Controller
         Pesanan::where('kd_pesanan', $kd_pesanan)->delete();
 
         return back()->with('success', 'Pesanan berhasil dihapus');
+    }
+
+    public function generatePdf() {
+        $data = Payment::orderBy('created_at', 'desc')->get();
+
+        $pdf = PDF::loadView('template', compact('data'));
+
+        $pdf->setPaper('A3', 'landscape');
+
+        $filename = 'report_' . Carbon::now()->format('Ymd_His') . '.pdf';
+
+        return $pdf->download($filename);
     }
 }

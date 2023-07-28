@@ -8,6 +8,7 @@ use App\Models\PesananDetail;
 use App\Models\Payment;
 use App\Models\Menu;
 use App\Models\Kategori;
+use Auth;
 
 use Carbon\Carbon;
 
@@ -97,18 +98,22 @@ class DashboardController extends Controller
 
         // dd($listBulan, $totalPendapatanList);
 
-        return view('user.dashboard', compact(
-            'pageName',
-            'pesanan_tertunda',
-            'total_pesanan',
-            'total_pendapatan_harian',
-            'total_pendapatan_bulan',
-            'menuCategories',
-            'menuCategoryCounts',
-            'listBulan',
-            'totalPendapatanList',
-            'maxTotalPendapatan',
-            'backgroundColor'
-        ));
+        if (Auth::user()->hasRole('kasir')) {
+            return redirect('/tambah-pesanan');
+        } else {    
+            return view('user.dashboard', compact(
+                'pageName',
+                'pesanan_tertunda',
+                'total_pesanan',
+                'total_pendapatan_harian',
+                'total_pendapatan_bulan',
+                'menuCategories',
+                'menuCategoryCounts',
+                'listBulan',
+                'totalPendapatanList',
+                'maxTotalPendapatan',
+                'backgroundColor'
+            ));
+        }
     }
 }

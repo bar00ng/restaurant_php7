@@ -18,11 +18,13 @@
                         <div class="text-sm text-gray-500">{{ 'Rp ' . number_format($d['total_pesanan']) }}</div>
 
                         <div class="mt-3 d-flex">
-                            <form action="{{ route('pesanan.delete', ['kd_pesanan' => $d['kd_pesanan']]) }}" class="ml-2" method="post">
-                                @method('DELETE')
-                                @csrf
-                                <button class="btn btn-sm btn-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete data" type="submit"><i class="fas fa-fw fa-trash"></i></button>
-                            </form>
+                            @if (Auth::user()->hasRole('superadmin'))
+                                <form action="{{ route('pesanan.delete', ['kd_pesanan' => $d['kd_pesanan']]) }}" class="ml-2" method="post">
+                                    @method('DELETE')
+                                    @csrf
+                                    <button class="btn btn-sm btn-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete data" type="submit"><i class="fas fa-fw fa-trash"></i></button>
+                                </form>
+                            @endif
 
                             <button type="button" class="btn btn-primary btn-sm ml-2" data-toggle="modal" data-target="#detail-modal-{{ $no }}"  data-bs-toggle="tooltip" data-bs-placement="top" title="Lihat Detail Pesanan">
                                 <i class="fas fa-eye fa-fw"></i>

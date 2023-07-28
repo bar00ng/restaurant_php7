@@ -107,11 +107,9 @@
                     </div>
         
                     <!-- Button Submit -->
-                        <div class="col-lg-6 col-sm-12">
+                    <div class="row">
+                        <div class="col-lg-12">
                             <button type="submit" class="btn btn-primary btn-block">Open Bill</button>
-                        </div>
-                        <div class="col-lg-6 col-sm-12">
-                            <a href="#" class="btn btn-secondary btn-block" role="button">Payment</a>
                         </div>
                     </div>
                 </form>

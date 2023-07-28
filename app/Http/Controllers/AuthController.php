@@ -19,7 +19,7 @@ class AuthController extends Controller
     {
         $validated = $r->validate([
             'email' => 'required|email',
-            'password' => 'required|min:8',
+            'password' => 'required',
         ], [
             'required' => 'Kolom :attribute wajib diisi.',
             'email' => 'Format :attribute tidak valid.',

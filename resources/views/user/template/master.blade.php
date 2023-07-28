@@ -40,13 +40,16 @@
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
 
-            <!-- Nav Item - Dashboard -->
-            <li class="nav-item {{ request()->routeIs('*dashboard*') ? 'active' : '' }}">
-                <a class="nav-link" href="{{ route('dashboard') }}">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span></a>
-            </li>
+            @if (Auth::user()->hasRole(['superadmin', 'owner']))
+                <!-- Nav Item - Dashboard -->
+                <li class="nav-item {{ request()->routeIs('*dashboard*') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('dashboard') }}">
+                        <i class="fas fa-fw fa-tachometer-alt"></i>
+                        <span>Dashboard</span></a>
+                </li>
+            @endif
 
+            
             <!-- Divider -->
             <hr class="sidebar-divider">
 
@@ -64,50 +67,55 @@
                 </a>
                 <div id="collapsePesanan" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="{{ route('pesanan') }}">Tambah Pesanan</a>
+                        @if (Auth::user()->hasRole(['superadmin', 'kasir']))
+                            <a class="collapse-item" href="{{ route('pesanan') }}">Tambah Pesanan</a>
+                        @endif
                         <a class="collapse-item" href="{{ route('pesanan.tertunda') }}">Daftar Pesanan <b>Tertunda</b></a>
                         <a class="collapse-item" href="{{ route('pesanan.selesai') }}">Daftar Pesanan <b>Selesai</b></a>
                     </div>
                 </div>
             </li>
+            
 
-            <!-- Divider -->
-            <hr class="sidebar-divider">
+            @if (Auth::user()->hasRole(['superadmin', 'owner']))
+                <!-- Divider -->
+                <hr class="sidebar-divider">
 
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                Manage
-            </div>
-
-            <!-- Nav Item - Manage Menu -->
-            <li class="nav-item {{ request()->routeIs('*kategori*') ? 'active' : '' }} {{ request()->routeIs('*menu*') ? 'active' : '' }}">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
-                    aria-expanded="true" aria-controls="collapsePages">
-                    <i class="fas fa-fw fa-list"></i>
-                    <span>Menu</span>
-                </a>
-                <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="{{ route('menu') }}">Manage <b>Menu</b></a>
-                        <a class="collapse-item" href="{{ route('kategori') }}">Manage <b>Kategori</b></a>
-                    </div>
+                <!-- Heading -->
+                <div class="sidebar-heading">
+                    Manage
                 </div>
-            </li>
 
-            <!-- Nav Item - Manage User -->
-            <li class="nav-item {{ request()->routeIs('*kasir*') ? 'active' : '' }} {{ request()->routeIs('*owner*') ? 'active' : '' }}">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseManageUser"
-                    aria-expanded="true" aria-controls="collapsePages">
-                    <i class="fas fa-fw fa-users"></i>
-                    <span>Users</span>
-                </a>
-                <div id="collapseManageUser" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="{{ route('kasir') }}">Manage <b>Kasir</b></a>
-                        <a class="collapse-item" href="{{ route('owner') }}">Manage <b>Owner</b></a>
+                <!-- Nav Item - Manage Menu -->
+                <li class="nav-item {{ request()->routeIs('*kategori*') ? 'active' : '' }} {{ request()->routeIs('*menu*') ? 'active' : '' }}">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
+                        aria-expanded="true" aria-controls="collapsePages">
+                        <i class="fas fa-fw fa-list"></i>
+                        <span>Menu</span>
+                    </a>
+                    <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <a class="collapse-item" href="{{ route('menu') }}">Manage <b>Menu</b></a>
+                            <a class="collapse-item" href="{{ route('kategori') }}">Manage <b>Kategori</b></a>
+                        </div>
                     </div>
-                </div>
-            </li>
+                </li>
+
+                <!-- Nav Item - Manage User -->
+                <li class="nav-item {{ request()->routeIs('*kasir*') ? 'active' : '' }} {{ request()->routeIs('*owner*') ? 'active' : '' }}">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseManageUser"
+                        aria-expanded="true" aria-controls="collapsePages">
+                        <i class="fas fa-fw fa-users"></i>
+                        <span>Users</span>
+                    </a>
+                    <div id="collapseManageUser" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <a class="collapse-item" href="{{ route('kasir') }}">Manage <b>Kasir</b></a>
+                            <a class="collapse-item" href="{{ route('owner') }}">Manage <b>Owner</b></a>
+                        </div>
+                    </div>
+                </li>
+            @endif
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
@@ -136,55 +144,57 @@
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Nav Item - Cart -->
-                        <li class="nav-item dropdown no-arrow mx-1">
-                            <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-shopping-cart fa-fw"></i>
-                                <!-- Counter - Messages -->
-                                <span class="badge badge-danger badge-counter">{{ Cart::count() }}</span>
-                            </a>
-                            <!-- Dropdown - Messages -->
-                            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                aria-labelledby="messagesDropdown">
-                                <h6 class="dropdown-header">
-                                    Daftar Belanja
-                                </h6>
-                                @if (Cart::content()->isEmpty())
-                                    <div class="dropdown-item d-flex align-items-center justify-content-center">
-                                        <div>Keranjang Masih Kosong</div>
-                                    </div>
-                                @else
-                                    @foreach (Cart::content() as $row)
+                        @if (Auth::user()->hasRole(['superadmin', 'kasir']))
+                            <li class="nav-item dropdown no-arrow mx-1">
+                                <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fas fa-shopping-cart fa-fw"></i>
+                                    <!-- Counter - Messages -->
+                                    <span class="badge badge-danger badge-counter">{{ Cart::count() }}</span>
+                                </a>
+                                <!-- Dropdown - Messages -->
+                                <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                    aria-labelledby="messagesDropdown">
+                                    <h6 class="dropdown-header">
+                                        Daftar Belanja
+                                    </h6>
+                                    @if (Cart::content()->isEmpty())
+                                        <div class="dropdown-item d-flex align-items-center justify-content-center">
+                                            <div>Keranjang Masih Kosong</div>
+                                        </div>
+                                    @else
+                                        @foreach (Cart::content() as $row)
+                                            <div class="dropdown-item d-flex align-items-center justify-content-between">
+                                                <div>
+                                                    <div class="text-truncate">{{ $row->name }}</div>
+                                                    <div class="text-gray-500">{{ 'Rp. '. number_format($row->price) }}</div>
+                                                </div>
+
+                                                <div>
+                                                    <div class="text-truncate">{{ $row->qty }}</div>
+                                                </div>
+
+                                                <div>
+                                                    <form action="{{ route('cart.remove', ['cart_item_id' => $row->rowId]) }}" method="post">
+                                                        @csrf
+                                                        <button type="submit" class="btn text-danger"  data-bs-toggle="tooltip" data-bs-placement="top" title="Remove from Cart"><i class="fas fa-fw fa-trash"></i></button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        @endforeach
                                         <div class="dropdown-item d-flex align-items-center justify-content-between">
                                             <div>
-                                                <div class="text-truncate">{{ $row->name }}</div>
-                                                <div class="text-gray-500">{{ 'Rp. '. number_format($row->price) }}</div>
+                                                <b>Total Belanja</b>
                                             </div>
-
-                                            <div>
-                                                <div class="text-truncate">{{ $row->qty }}</div>
-                                            </div>
-
-                                            <div>
-                                                <form action="{{ route('cart.remove', ['cart_item_id' => $row->rowId]) }}" method="post">
-                                                    @csrf
-                                                    <button type="submit" class="btn text-danger"  data-bs-toggle="tooltip" data-bs-placement="top" title="Remove from Cart"><i class="fas fa-fw fa-trash"></i></button>
-                                                </form>
-                                            </div>
+                                            <div>{{ 'Rp. ' . Cart::subtotal() }}</div>
                                         </div>
-                                    @endforeach
-                                    <div class="dropdown-item d-flex align-items-center justify-content-between">
-                                        <div>
-                                            <b>Total Belanja</b>
+                                        <div class="dropdown-item d-flex align-items-center justify-content-center">
+                                            <a href="{{ route('pesanan.form.add') }}" role="button" class="btn btn-block btn-primary btn-sm">Checkout</a>
                                         </div>
-                                        <div>{{ 'Rp. ' . Cart::subtotal() }}</div>
-                                    </div>
-                                    <div class="dropdown-item d-flex align-items-center justify-content-center">
-                                        <a href="{{ route('pesanan.form.add') }}" role="button" class="btn btn-block btn-primary btn-sm">Checkout</a>
-                                    </div>
-                                @endif
-                            </div>
-                        </li>
+                                    @endif
+                                </div>
+                            </li>
+                        @endif
 
                         <div class="topbar-divider d-none d-sm-block"></div>
 
@@ -225,7 +235,7 @@
                             <a href="{{ route('kategori.form.add') }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                                 class="fas fa-plus fa-sm text-white-50"></i> Tambah Kategori</a>
                         @elseif (request()->routeIs('dashboard'))
-                            <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                            <a href="{{ route('generate.pdf') }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                                 class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
                         @elseif (request()->routeIs('menu'))
                             <a href="{{ route('menu.form.add') }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
