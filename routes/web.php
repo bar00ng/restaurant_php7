@@ -26,7 +26,7 @@ Route::get('/', function () {
     return redirect('/login');
 });
 
-Route::group(['middleware' => ['auth', 'role:superadmin']], function() {
+Route::group(['middleware' => ['auth', 'role:superadmin|owner']], function() {
     // Routes untuk kategori
     Route::get('/list-kategori', [KategoriController::class, 'index'])->name('kategori');
     Route::get('/tambah-kategori', [KategoriController::class, 'formAdd'])->name('kategori.form.add');
@@ -59,13 +59,20 @@ Route::group(['middleware' => ['auth', 'role:superadmin']], function() {
     Route::patch('/edit-owner/{user_id}', [OwnerController::class, 'patch'])->name('owner.patch');
     Route::delete('/hapus-owner/{user_id}', [OwnerController::class, 'delete'])->name('owner.delete');
 
+    // Routes untuk generate pdf
+    Route::get('/generate-pdf', [PesananController::class, 'generatePdf'])->name('generate.pdf');
+});
+
+Route::group(['middleware' => ['auth', 'role:superadmin|kasir|owner']], function() {
+    Route::get('/pesanan-tertunda', [PesananController::class, 'getPesananTertunda'])->name('pesanan.tertunda');
+    Route::get('/pesanan-selesai', [PesananController::class, 'getPesananSelesai'])->name('pesanan.selesai');
+});
+
+Route::group(['middleware' => ['auth', 'role:superadmin|kasir']], function() {
     // Routes untuk Pesanan
     Route::get('/tambah-pesanan', [PesananController::class, 'index'])->name('pesanan');
     Route::get('/pesanan-checkout', [PesananController::class, 'formAdd'])->name('pesanan.form.add');
-    Route::delete('/hapus-pesanan/{kd_pesanan}', [PesananController::class, 'delete'])->name('pesanan.delete');
     Route::post('/pesanan-checkout', [PesananController::class, 'store'])->name('pesanan.store');
-    Route::get('/pesanan-tertunda', [PesananController::class, 'getPesananTertunda'])->name('pesanan.tertunda');
-    Route::get('/pesanan-selesai', [PesananController::class, 'getPesananSelesai'])->name('pesanan.selesai');
     Route::get('/pesanan-payment/{kd_pesanan}', [PaymentController::class, 'index'])->name('pesanan.payment');
     Route::post('/pesanan-payment/{kd_pesanan}', [PaymentController::class, 'store'])->name('payment.store');
 
@@ -73,6 +80,10 @@ Route::group(['middleware' => ['auth', 'role:superadmin']], function() {
     Route::post('/add-to-cart/{menu_id}', [CartController::class, 'store'])->name('cart.store');
     Route::post('/destroy-cart', [CartController::class, 'destroy'])->name('cart.destroy');
     Route::post('/remove-from-cart/{cart_item_id}', [CartController::class, 'remove'])->name('cart.remove');
+});
+
+Route::group(['middleware' => ['auth', 'role:superadmin']], function() {
+    Route::delete('/hapus-pesanan/{kd_pesanan}', [PesananController::class, 'delete'])->name('pesanan.delete');
 });
 
 Route::group(['middleware' => ['auth']], function() {

@@ -17,7 +17,7 @@ class Payment extends Model
 
     use HasFactory;
 
-    public function pesanan(): BelongsTo {
+    public function pesanan(){
         return $this->belongsTo(Pesanan::class, 'kd_pesanan', 'kd_pesanan');
     }
 }
