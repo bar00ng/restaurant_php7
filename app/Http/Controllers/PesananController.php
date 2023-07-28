@@ -75,4 +75,10 @@ class PesananController extends Controller
         
         return view('user.pesanan.listSelesai', compact('data', 'pageName'));
     }
+
+    public function delete($kd_pesanan) {
+        Pesanan::where('kd_pesanan', $kd_pesanan)->delete();
+
+        return back()->with('success', 'Pesanan berhasil dihapus');
+    }
 }

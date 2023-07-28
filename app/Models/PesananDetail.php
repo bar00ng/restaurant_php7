@@ -26,6 +26,6 @@ class PesananDetail extends Model
     }
 
     public function menu(): HasOne {
-        return $this->hasOne(Menu::class, 'menu_id', 'id');
+        return $this->hasOne(Menu::class, 'id', 'menu_id');
     }
 }

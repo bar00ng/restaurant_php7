@@ -5,14 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use App\Models\User;
+use App\Models\Payment;
 
 class Pesanan extends Model
 {
     protected $table = 'pesanan';
 
-    protected $primaryKey = 'kd_pesanan';
+    // protected $primaryKey = 'kd_pesanan';
 
     protected $fillable = [
         'kd_pesanan',
@@ -27,6 +29,10 @@ class Pesanan extends Model
 
     public function user(): BelongsTo {
         return $this->belongsTo(User::class, 'user_id', 'id');
+    }
+
+    public function payment(): HasOne {
+        return $this->hasOne(Payment::class, 'kd_pesanan', 'kd_pesanan');
     }
 
     public function detailPesanan(): HasMany {

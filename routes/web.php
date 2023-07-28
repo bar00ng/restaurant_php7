@@ -62,11 +62,12 @@ Route::group(['middleware' => ['auth', 'role:superadmin']], function() {
     // Routes untuk Pesanan
     Route::get('/tambah-pesanan', [PesananController::class, 'index'])->name('pesanan');
     Route::get('/pesanan-checkout', [PesananController::class, 'formAdd'])->name('pesanan.form.add');
+    Route::delete('/hapus-pesanan/{kd_pesanan}', [PesananController::class, 'delete'])->name('pesanan.delete');
     Route::post('/pesanan-checkout', [PesananController::class, 'store'])->name('pesanan.store');
     Route::get('/pesanan-tertunda', [PesananController::class, 'getPesananTertunda'])->name('pesanan.tertunda');
     Route::get('/pesanan-selesai', [PesananController::class, 'getPesananSelesai'])->name('pesanan.selesai');
     Route::get('/pesanan-payment/{kd_pesanan}', [PaymentController::class, 'index'])->name('pesanan.payment');
-    Route::post('/pesanan-payment/{kd_pesanan}', [PaymentController::class, 'store'])->name('pesanan.payment');
+    Route::post('/pesanan-payment/{kd_pesanan}', [PaymentController::class, 'store'])->name('payment.store');
 
     // Routes untuk tambah barang ke cart
     Route::post('/add-to-cart/{menu_id}', [CartController::class, 'store'])->name('cart.store');

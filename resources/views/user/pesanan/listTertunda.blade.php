@@ -12,7 +12,7 @@
                         <div class="text-sm text-gray-500">{{ 'Rp ' . number_format($d['total_pesanan']) }}</div>
                     </div>
                     <div>
-                        <a href="{{ route('pesanan.checkout', ['kd_pesanan' => $d['kd_pesanan']]) }}" class="btn btn-google btn-sm" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Checkout">
+                        <a href="{{ route('pesanan.payment', ['kd_pesanan' => $d['kd_pesanan']]) }}" class="btn btn-google btn-sm" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Checkout">
                             <i class="fas fa-wallet fa-fw"></i>
                         </a>
                     </div>

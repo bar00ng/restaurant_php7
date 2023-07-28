@@ -11,8 +11,8 @@ class Payment extends Model
 
     protected $fillable = [
         'kd_pesanan',
-        'nominal_pesanan',
-        'kembalian_pesanan'
+        'nominal_payment',
+        'kembalian_payment'
     ];
 
     use HasFactory;
