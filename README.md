@@ -1,64 +1,46 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# Restaurant App
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Requirement PHP 7 ke atas
 
-## About Laravel
+Untuk menjalankan proyek Laravel dengan lancar, pastikan sistem Anda memenuhi persyaratan berikut:
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+1. **PHP 7** atau versi lebih tinggi: Laravel memerlukan PHP 7.3.0 atau yang lebih baru. Pastikan Anda telah menginstal versi PHP yang sesuai pada sistem Anda.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+2. **Composer**: Laravel menggunakan Composer untuk mengelola dependensi proyek. Pastikan Anda telah menginstal Composer dan dapat menjalankannya dari baris perintah.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+3. **Web Server**: Anda memerlukan web server seperti Apache atau Nginx untuk menjalankan proyek Laravel. Jika Anda ingin menggunakan server pengembangan bawaan, Anda dapat menggunakan perintah `php artisan serve` untuk menjalankannya.
 
-## Learning Laravel
+4. **Database**: Pastikan Anda telah menginstal dan mengkonfigurasi database yang didukung oleh Laravel, seperti MySQL, PostgreSQL, SQLite, atau SQL Server.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+5. **Ekstensi PHP**: Beberapa ekstensi PHP diperlukan oleh Laravel untuk berfungsi dengan baik, seperti `mbstring`, `dom`, `json`, dan lainnya. Pastikan ekstensi yang dibutuhkan telah diaktifkan di file konfigurasi php.ini Anda.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Step Instalasi pada Proyek Laravel
 
-## Laravel Sponsors
+Berikut adalah langkah-langkah untuk menginstal dan menjalankan proyek Laravel:
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+1. **Clone Proyek dari Repositori**
 
-### Premium Partners
+   ```bash
+   git clone https://url-repositori/proyek-laravel.git
+   cd proyek-laravel```
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+2.  **Install Dependensi**
+   Jalankan perintah berikut untuk menginstal semua dependensi yang diperlukan oleh proyek Laravel menggunakan Composer:
+    ```composer install```
+    
+4.  **Konfigurasi Environment**
+    Salin file .env.example menjadi .env:
+    ```cp .env.example .env```
+    Kemudian, atur konfigurasi lingkungan, seperti pengaturan database, sesuai dengan lingkungan Anda.
+    
+5.  **Generate Kunci Aplikasi**
+    Setiap instalasi Laravel memerlukan kunci aplikasi yang unik. Jalankan perintah berikut untuk menghasilkan kunci aplikasi:
+    ```php artisan key:generate```
+    
+7.  **Migrasi Database**
+    Jalankan migrasi database untuk membuat tabel yang diperlukan oleh proyek:
+    ```php artisan migrate```
+    
+8.  **Jalankan Server Pengembangan**
+    Untuk menjalankan server pengembangan bawaan Laravel, gunakan perintah:
+    ```php artisan serve```
